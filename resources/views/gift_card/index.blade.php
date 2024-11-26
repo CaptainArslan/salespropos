@@ -4,10 +4,10 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ $errors->first('card_no') }}</div>
 @endif
 @if(session()->has('message'))
-  <div class="alert alert-success alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{!! session()->get('message') !!}</div> 
+  <div class="alert alert-success alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{!! session()->get('message') !!}</div>
 @endif
 @if(session()->has('not_permitted'))
-  <div class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ session()->get('not_permitted') }}</div> 
+  <div class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ session()->get('not_permitted') }}</div>
 @endif
 
 <section>
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 @foreach($lims_gift_card_all as $key=>$gift_card)
-                <?php 
+                <?php
                     $created_by = DB::table('users')->find($gift_card->created_by);
                 ?>
                 <tr data-id="{{$gift_card->id}}">
@@ -135,7 +135,7 @@
             <div class="modal-body">
               <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
                 {!! Form::open(['route' => 'gift_cards.store', 'method' => 'post']) !!}
-                <?php 
+                <?php
                   $lims_warehouse_list = DB::table('warehouses')->where('is_active', true)->get();
                 ?>
                   <div class="form-group">
@@ -194,7 +194,7 @@
           <div class="modal-body">
             <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
               {!! Form::open(['route' => ['gift_cards.update', 1], 'method' => 'put']) !!}
-              <?php 
+              <?php
                 $lims_warehouse_list = DB::table('warehouses')->where('is_active', true)->get();
               ?>
                 <div class="form-group">
@@ -276,7 +276,7 @@
 
     var gift_card_id = [];
     var user_verified = <?php echo json_encode(env('USER_VERIFIED')) ?>;
-    
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -316,7 +316,7 @@
             $(".customer_list").hide();
             $("select[name='user_id']").prop('required',true);
             $("select[name='customer_id']").prop('required',false);
-        } 
+        }
         else {
             $(".user_list").hide();
             $(".customer_list").show();
@@ -344,14 +344,14 @@
           var divToPrint=document.getElementById('viewModal');
           var newWin=window.open('','Print-Window');
           newWin.document.open();
-          newWin.document.write('<link rel="stylesheet" href="<?php echo asset('public/vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css"><style type="text/css">@media print {.modal-dialog { max-width: 1000px;} }</style><body onload="window.print()">'+divToPrint.innerHTML+'</body>');
+          newWin.document.write('<link rel="stylesheet" href="<?php echo asset('/vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css"><style type="text/css">@media print {.modal-dialog { max-width: 1000px;} }</style><body onload="window.print()">'+divToPrint.innerHTML+'</body>');
           newWin.document.close();
           setTimeout(function(){newWin.close();},10);
     });
 
     $('#gift_card-modal .genbutton').on("click", function(){
       $.get('gift_cards/gencode', function(data){
-        $("input[name='card_no']").val(data);      
+        $("input[name='card_no']").val(data);
       });
     });
 
@@ -388,7 +388,7 @@
                   $(".user_list_edit").hide();
                   $(".customer_list_edit").show();
                 }
-                
+
                 $("input[name='expired_date_edit']").val(data['expired_date']);
                 $('.selectpicker').selectpicker('refresh');
             });
